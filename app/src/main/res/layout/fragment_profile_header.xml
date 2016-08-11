@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_below="@+id/profileAppBar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:paddingTop="5dp"
+        android:id="@+id/ivProfileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        tools:src="@drawable/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvScreenName"
+        tools:text="Screen Name"
+        android:layout_toRightOf="@+id/ivProfileImage"/>
+
+    <TextView
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTagLine"
+        android:layout_toRightOf="@+id/ivProfileImage"
+        android:layout_alignLeft="@+id/tvScreenName"
+        tools:text="TagLine"
+        android:layout_below="@+id/ivProfileImage"/>
+
+    <LinearLayout
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvTagLine"
+        android:id="@+id/llFollow">
+        <TextView
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFollowing"
+            android:text="Following:"/>
+
+        <TextView
+            android:paddingLeft="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFriends"
+            tools:text="10"/>
+
+        <TextView
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFollowingCount"
+            tools:text="Friends:"/>
+
+        <TextView
+            android:paddingLeft="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFriendsCount"
+            tools:text="20"/>
+    </LinearLayout>
+
+</RelativeLayout>
