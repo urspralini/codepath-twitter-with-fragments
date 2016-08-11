@@ -20,7 +20,7 @@
             android:id="@+id/homeTimeLineFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.codepath.apps.twitter.fragments.HomeTimeLineFragment"
+            android:name="com.codepath.apps.twitter.fragments.MentionsTimeLineFragment"
             tools:layout="@layout/fragment_twitter_list" />
 
     </android.support.design.widget.CoordinatorLayout>

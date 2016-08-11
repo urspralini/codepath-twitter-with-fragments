@@ -3,10 +3,10 @@ package com.codepath.apps.twitter.fragments;
 /**
  * Created by pbabu on 8/11/16.
  */
-public class HomeTimeLineFragment extends TweetListFragment {
+public class MentionsTimeLineFragment extends TweetListFragment {
 
     @Override
     protected void fetchTweets() {
-        mClient.getHomeTimeline(mMaxId, handler);
+        mClient.getMentionsTimeline(mMaxId, handler);
     }
 }
