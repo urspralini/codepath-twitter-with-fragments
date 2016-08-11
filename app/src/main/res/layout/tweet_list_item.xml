@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlTweetItem"
+    android:layout_width="match_parent"
+    android:background="@drawable/tweet_item_shape"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        tools:src="@drawable/ic_launcher"
+        android:id="@+id/ivUserProfileImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:id="@+id/llTweetContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/ivUserProfileImage">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/tvName"
+            android:gravity="center_horizontal"
+            android:layout_gravity="left"
+            tools:text="Prabhu Ramanathan Babu"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/tvUserHandle"
+            tools:text="\@pralini"
+            android:textSize="12sp"
+            android:textColor="@color/grey"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="5dp"
+            android:layout_toRightOf="@+id/tvName"
+            android:layout_toEndOf="@+id/tvName" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvRelativeTimeStamp"
+            android:gravity="right"
+            tools:text="3h"
+            android:textSize="10sp"
+            android:textColor="@color/grey"
+            android:layout_above="@+id/tvTweetText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvUserHandle"
+            android:maxLines="4"
+            android:id="@+id/tvTweetText"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:textColor="@color/black"
+            tools:text="Study Says Democrats and Republicans Can Agree on These 3 TV Shows https://t.co/tgJGtf2gY1"
+            />
+    </RelativeLayout>
+</RelativeLayout>

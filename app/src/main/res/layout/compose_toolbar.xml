@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.widget.Toolbar
+        android:background="@color/white"
+        android:titleTextAppearance="@style/ToolBar.TitleText"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:layout_width="match_parent"
+        android:id="@+id/composeToolbar"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/ivComposeCancel"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="left"
+            android:src="@drawable/close"
+            android:onClick="onClickCancel"
+            />
+
+        <ImageView
+            android:id="@+id/ivComposeUserProfile"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="right"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            tools:src="@drawable/ic_launcher"
+            />
+
+    </android.support.v7.widget.Toolbar>
+</layout>
+

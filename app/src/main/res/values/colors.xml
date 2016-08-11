@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00aced</color>
+    <color name="colorPrimaryDark">#0084b4</color>
+    <color name="colorAccent">#1dcaff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="grey">#A6ACAF</color>
+    <color name="golden_yellow">#FFE000</color>
+    <color name="lightGrey">#E5E7E9</color>
+    <color name="background_green">#5DBCD2</color>
+    <color name="tweet_background">#B25385</color>
+    <color name="hyper_link_blue">#0645AD</color>
+    <color name="dark_brown">#280115</color>
+    <color name="silver">#C0C0C0</color>
+
+</resources>

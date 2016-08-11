@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="newTweet" type="com.codepath.apps.twitter.beans.NewTweet"/>
+        <variable name="handlers"
+            type="com.codepath.apps.twitter.handlers.Handlers" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.codepath.apps.twitter.activities.ComposeTweetActivity">
+
+        <include layout="@layout/compose_toolbar"
+            android:id="@+id/composeToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:hint="@string/compose_tweet_hint"
+            android:id="@+id/etNewTweet"
+            android:text="@{newTweet.text}"
+            android:layout_below="@+id/composeToolBar"
+            android:gravity="left"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:focusable="true"
+            android:addTextChangedListener="@{newTweet.watcher}"
+            android:focusableInTouchMode="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvRemainingCharCount"
+            android:text="@{String.valueOf(newTweet.remainingCharCount)}"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_alignTop="@+id/bnTweet"
+            android:layout_toLeftOf="@+id/bnTweet"
+            android:layout_toStartOf="@+id/bnTweet" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tweet_button_text"
+            android:id="@+id/bnTweet"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/compose_button_shape"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:onClick="onClickTweet"
+            android:layout_below="@+id/etNewTweet"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+</layout>
+

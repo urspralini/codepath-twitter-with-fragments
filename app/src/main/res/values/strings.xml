@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pwitter</string>
+    <string name="login_label">Log in</string>
+    <string name="compose_tweet_hint">What\'s happening?</string>
+    <string name="tweet_button_text">Tweet</string>
+    <string name="remaining_chars_count">140</string>
+
+</resources>
