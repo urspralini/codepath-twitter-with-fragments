@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.codepath.apps.twitter.R;
+import com.codepath.apps.twitter.fragments.ProfileHeaderFragment;
 import com.codepath.apps.twitter.fragments.UserTimeLineFragment;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -13,9 +14,11 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         UserTimeLineFragment userTimeLineFragment = UserTimeLineFragment.newInstance("pralini");
+        ProfileHeaderFragment profileHeaderFragment = ProfileHeaderFragment.newInstance("pralini");
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.flUserTimeLine, userTimeLineFragment)
+                .add(R.id.flProfileHeader, profileHeaderFragment)
                 .commit();
     }
 }

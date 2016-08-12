@@ -89,6 +89,6 @@ public abstract class TweetListFragment extends Fragment{
 
     private void getTimeLineTweets(){
         if(mTweetsAdapter.getItemCount() > 60) return;
-        fetchTweets();;
+        fetchTweets();
     }
 }
