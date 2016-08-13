@@ -1,12 +1,10 @@
 package com.codepath.apps.twitter.activities;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +20,7 @@ import com.codepath.apps.twitter.databinding.ActivityTimelineBinding;
 import com.codepath.apps.twitter.fragments.HomeTimeLineFragment;
 import com.codepath.apps.twitter.fragments.MentionsTimeLineFragment;
 import com.codepath.apps.twitter.models.User;
+import com.codepath.apps.twitter.utils.Helper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -30,7 +29,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends BaseActivity{
 
     private Toolbar mToolBar;
     private ImageView mIvToolBarImage;
@@ -125,13 +124,20 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     public void showUserProfile(MenuItem item) {
-        Intent userProfileIntent = new Intent(this, ProfileActivity.class);
-        startActivity(userProfileIntent);
+        showUserProfile(mCurrentUser.getScreenName());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_timeline, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!Helper.isNetworkAvailable(this) || !Helper.isOnline()){
+            Helper.showSnackBar(mVPager, this);
+        }
     }
 }

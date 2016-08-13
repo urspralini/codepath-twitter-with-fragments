@@ -1,6 +1,5 @@
 package com.codepath.apps.twitter.fragments;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.codepath.apps.twitter.R;
 import com.codepath.apps.twitter.RestApplication;
 import com.codepath.apps.twitter.clients.TwitterClient;
-import com.codepath.apps.twitter.databinding.FragmentProfileHeaderBinding;
 import com.codepath.apps.twitter.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
@@ -29,6 +29,12 @@ import cz.msebera.android.httpclient.Header;
 public class ProfileHeaderFragment extends Fragment {
 
     public static final String SCREEN_NAME_KEY = "screen_name";
+    private ImageView ivProfileImage;
+    private TextView tvScreenName;
+    private TextView tvTagLine;
+    private TextView tvFollowingCount;
+    private TextView tvFriendsCount;
+
     private JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject object) {
@@ -37,7 +43,11 @@ public class ProfileHeaderFragment extends Fragment {
                 mUser = User.fromJSON(object);
                 Picasso.with(getActivity())
                         .load(mUser.getProfileImageUrl())
-                        .into(mBinding.ivProfileImage);
+                        .into(ivProfileImage);
+                tvScreenName.setText(mUser.getScreenName());
+                tvTagLine.setText(mUser.getTagLine());
+                tvFriendsCount.setText(String.valueOf(mUser.getFriendsCount()));
+                tvFollowingCount.setText(String.valueOf(mUser.getFollowingCount()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -60,7 +70,6 @@ public class ProfileHeaderFragment extends Fragment {
             super.onFailure(statusCode, headers, throwable, errorResponse);
         }
     };
-    private FragmentProfileHeaderBinding mBinding;
     private User mUser;
     private TwitterClient mClient = RestApplication.getRestClient();
 
@@ -83,9 +92,12 @@ public class ProfileHeaderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_header, container, false);
-        View view = mBinding.getRoot();
-        mBinding.setUser(mUser);
+        final View view = inflater.inflate(R.layout.fragment_profile_header, container, false);
+        ivProfileImage = (ImageView)view.findViewById(R.id.ivProfileImage);
+        tvScreenName = (TextView)view.findViewById(R.id.tvScreenName);
+        tvTagLine = (TextView)view.findViewById(R.id.tvTagLine);
+        tvFollowingCount = (TextView)view.findViewById(R.id.tvFollowingCount);
+        tvFriendsCount = (TextView)view.findViewById(R.id.tvFriendsCount);
         return view;
     }
 

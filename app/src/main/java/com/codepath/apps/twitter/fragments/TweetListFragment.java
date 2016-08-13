@@ -1,5 +1,6 @@
 package com.codepath.apps.twitter.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.codepath.apps.twitter.R;
 import com.codepath.apps.twitter.RestApplication;
+import com.codepath.apps.twitter.viewholders.TweetItemViewHolder;
 import com.codepath.apps.twitter.adapters.TweetsAdapter;
 import com.codepath.apps.twitter.clients.TwitterClient;
 import com.codepath.apps.twitter.models.Tweet;
@@ -28,13 +30,14 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by pbabu on 8/11/16.
  */
-public abstract class TweetListFragment extends Fragment{
+public abstract class TweetListFragment extends Fragment implements TweetItemViewHolder.onImageClickListener{
 
     protected List<Tweet> mTweets;
     protected TweetsAdapter mTweetsAdapter;
     protected TwitterClient mClient = RestApplication.getRestClient();
     protected RecyclerView mRvTweets;
     protected Long mMaxId;
+    private TweetItemViewHolder.onImageClickListener mListener;
     protected JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONArray jsonArray) {
@@ -65,7 +68,7 @@ public abstract class TweetListFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTweets = new ArrayList<>();
-        mTweetsAdapter = new TweetsAdapter(getActivity(), mTweets);
+        mTweetsAdapter = new TweetsAdapter(getActivity(), mTweets, this);
         getTimeLineTweets();
     }
 
@@ -76,6 +79,22 @@ public abstract class TweetListFragment extends Fragment{
         final View view = inflater.inflate(R.layout.fragment_twitter_list, container, false);
         configureRecycleView(view);
         return view;
+    }
+
+    @Override
+    public void showUserProfile(String screenName) {
+        mListener.showUserProfile(screenName);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof TweetItemViewHolder.onImageClickListener) {
+            mListener = (TweetItemViewHolder.onImageClickListener)context;
+        }else {
+            throw new ClassCastException(context.toString()
+                    + " must implement TweetItemViewHolder.onImageClickListener");
+        }
     }
 
     private void configureRecycleView(View view) {

@@ -1,7 +1,11 @@
 package com.codepath.apps.twitter.models;
 
+import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,9 +19,9 @@ public class User implements Parcelable {
     private long uid;
     private String screenName;
     private String profileImageUrl;
-    private int mFollowingCount = 0;
-    private int mFriendsCount = 0;
-    private String tagLine = "";
+    private int followingCount;
+    private int friendsCount;
+    private String tagLine;
 
     public static User fromJSON(JSONObject object) throws JSONException {
         User user = new User();
@@ -25,8 +29,8 @@ public class User implements Parcelable {
         user.uid = object.getLong("id");
         user.screenName = object.getString("screen_name");
         user.profileImageUrl = object.getString("profile_image_url");
-        user.mFollowingCount = object.getInt("followers_count");
-        user.mFriendsCount = object.getInt("friends_count");
+        user.followingCount = object.getInt("followers_count");
+        user.friendsCount = object.getInt("friends_count");
         user.tagLine = object.getString("description");
         return user;
     }
@@ -63,20 +67,20 @@ public class User implements Parcelable {
         this.uid = uid;
     }
 
-    public int getmFollowingCount() {
-        return mFollowingCount;
+    public int getFollowingCount() {
+        return followingCount;
     }
 
-    public void setmFollowingCount(int mFollowingCount) {
-        this.mFollowingCount = mFollowingCount;
+    public void setFollowingCount(int followingCount) {
+        this.followingCount = followingCount;
     }
 
-    public int getmFriendsCount() {
-        return mFriendsCount;
+    public int getFriendsCount() {
+        return friendsCount;
     }
 
-    public void setmFriendsCount(int mFriendsCount) {
-        this.mFriendsCount = mFriendsCount;
+    public void setFriendsCount(int friendsCount) {
+        this.friendsCount = friendsCount;
     }
 
     public String getTagLine() {
@@ -99,8 +103,8 @@ public class User implements Parcelable {
         dest.writeLong(this.uid);
         dest.writeString(this.screenName);
         dest.writeString(this.profileImageUrl);
-        dest.writeInt(this.mFollowingCount);
-        dest.writeInt(this.mFriendsCount);
+        dest.writeInt(this.followingCount);
+        dest.writeInt(this.friendsCount);
         dest.writeString(this.tagLine);
     }
 
@@ -112,8 +116,8 @@ public class User implements Parcelable {
         this.uid = in.readLong();
         this.screenName = in.readString();
         this.profileImageUrl = in.readString();
-        this.mFollowingCount = in.readInt();
-        this.mFriendsCount = in.readInt();
+        this.followingCount = in.readInt();
+        this.friendsCount = in.readInt();
         this.tagLine = in.readString();
     }
 
@@ -128,4 +132,9 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    @BindingAdapter({"bind:profileImageUrl"})
+    public static void loadImage(ImageView view, String url) {
+        Picasso.with(view.getContext()).load(url).into(view);
+    }
 }
