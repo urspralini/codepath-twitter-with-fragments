@@ -11,4 +11,5 @@
     <string name="no_internet_text">You are not connected to Internet.\n Check your internet connection</string>
     <string name="snackbar_internet_action_text">Turn on Internet</string>
     <string name="twitter_user_profile_image">twitter user profile image</string>
+    <string name="timeline_home">Home</string>
 </resources>

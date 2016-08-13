@@ -2,6 +2,7 @@ package com.codepath.apps.twitter.activities;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.twitter.R;
 import com.codepath.apps.twitter.RestApplication;
@@ -38,7 +38,7 @@ public class TimelineActivity extends BaseActivity{
     private ActivityTimelineBinding mBinding;
     private User mCurrentUser;
     private ViewPager mVPager;
-    private PagerSlidingTabStrip mTabs;
+    private TabLayout mTabs;
     private FragmentPagerAdapter mPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class TimelineActivity extends BaseActivity{
         };
         mVPager.setAdapter(mPagerAdapter);
         mTabs = mBinding.tabs;
-        mTabs.setViewPager(mVPager);
+        mTabs.setupWithViewPager(mVPager);
     }
 
     private void getCurrentUser() {
@@ -87,7 +87,6 @@ public class TimelineActivity extends BaseActivity{
                     Glide.with(TimelineActivity.this)
                             .load(mCurrentUser.getProfileImageUrl())
                             .into(mIvToolBarImage);
-                    mToolBarTitle.setText("@"+mCurrentUser.getScreenName());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -116,6 +115,7 @@ public class TimelineActivity extends BaseActivity{
         mToolBarTitle = mBinding.appbar.tvToolbarTitle;
         mIvToolBarImage = mBinding.appbar.ivUserImage;
         setSupportActionBar(mToolBar);
+        mToolBarTitle.setText(R.string.timeline_home);
         //Display icon in the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         // Remove default title text
