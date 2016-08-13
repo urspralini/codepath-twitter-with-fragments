@@ -6,5 +6,10 @@
     <string name="compose_tweet_hint">What\'s happening?</string>
     <string name="tweet_button_text">Tweet</string>
     <string name="remaining_chars_count">140</string>
-
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="no_internet_text">You are not connected to Internet.\n Check your internet connection</string>
+    <string name="snackbar_internet_action_text">Turn on Internet</string>
+    <string name="twitter_user_profile_image">twitter user profile image</string>
+    <string name="timeline_home">Home</string>
 </resources>

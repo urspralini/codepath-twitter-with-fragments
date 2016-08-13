@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.twitter.R;
-import com.codepath.apps.twitter.TweetItemViewHolder;
+import com.codepath.apps.twitter.viewholders.TweetItemViewHolder;
 import com.codepath.apps.twitter.models.Tweet;
 
 import java.text.ParseException;
@@ -24,10 +24,12 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private final List<Tweet> mTweets;
     private final Context mContext;
-
-    public TweetsAdapter(Context mContext, List<Tweet> mTweets) {
+    private final TweetItemViewHolder.onImageClickListener mListener;
+    public TweetsAdapter(Context mContext, List<Tweet> mTweets,
+                         TweetItemViewHolder.onImageClickListener listener) {
         this.mContext = mContext;
         this.mTweets = mTweets;
+        mListener = listener;
     }
 
     @Override
@@ -40,7 +42,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         final Context context = parent.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view = inflater.inflate(R.layout.tweet_list_item, parent, false);
-        return new TweetItemViewHolder(view);
+        final TweetItemViewHolder tweetItemViewHolder = new TweetItemViewHolder(view);
+        tweetItemViewHolder.ivUserProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final CharSequence screenName = tweetItemViewHolder.tvUserHandle.getText();
+                mListener.showUserProfile(screenName.toString().substring(1));
+            }
+        });
+        return tweetItemViewHolder;
     }
 
     @Override

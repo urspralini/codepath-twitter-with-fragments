@@ -54,4 +54,6 @@ dependencies {
     compile "com.android.support:design:${supportLibVersion}"
     //round corner image transformation
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
+
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }
