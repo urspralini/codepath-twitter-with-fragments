@@ -1,8 +1,10 @@
 package com.codepath.apps.twitter.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,12 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codepath.apps.twitter.Constants;
 import com.codepath.apps.twitter.R;
 import com.codepath.apps.twitter.RestApplication;
-import com.codepath.apps.twitter.viewholders.TweetItemViewHolder;
+import com.codepath.apps.twitter.activities.ComposeTweetActivity;
 import com.codepath.apps.twitter.adapters.TweetsAdapter;
 import com.codepath.apps.twitter.clients.TwitterClient;
 import com.codepath.apps.twitter.models.Tweet;
+import com.codepath.apps.twitter.models.User;
+import com.codepath.apps.twitter.viewholders.TweetItemViewHolder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -38,6 +43,7 @@ public abstract class TweetListFragment extends Fragment implements TweetItemVie
     protected RecyclerView mRvTweets;
     protected Long mMaxId;
     private TweetItemViewHolder.onImageClickListener mListener;
+    protected User mCurrentUser;
     protected JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONArray jsonArray) {
@@ -78,6 +84,13 @@ public abstract class TweetListFragment extends Fragment implements TweetItemVie
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.fragment_twitter_list, container, false);
         configureRecycleView(view);
+        FloatingActionButton fabCompose = (FloatingActionButton) view.findViewById(R.id.fabCompose);
+        fabCompose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TweetListFragment.this.onClickCompose(view);
+            }
+        });
         return view;
     }
 
@@ -95,6 +108,11 @@ public abstract class TweetListFragment extends Fragment implements TweetItemVie
             throw new ClassCastException(context.toString()
                     + " must implement TweetItemViewHolder.onImageClickListener");
         }
+    }
+
+    public void onClickCompose(View view){
+        Intent intent = new Intent(view.getContext(), ComposeTweetActivity.class);
+        startActivityForResult(intent, Constants.COMPOSE_REQUEST_CODE);
     }
 
     private void configureRecycleView(View view) {
