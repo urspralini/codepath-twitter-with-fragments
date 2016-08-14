@@ -1,7 +1,9 @@
 package com.codepath.apps.twitter.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import com.codepath.apps.twitter.Constants;
 import com.codepath.apps.twitter.R;
 import com.codepath.apps.twitter.RestApplication;
+import com.codepath.apps.twitter.activities.ComposeTweetActivity;
 import com.codepath.apps.twitter.adapters.FollowUserAdapter;
 import com.codepath.apps.twitter.clients.TwitterClient;
 import com.codepath.apps.twitter.models.User;
@@ -85,7 +88,19 @@ public abstract class UserFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.fragment_friends_following_list, container, false);
         configureRecyclerView(view);
+        FloatingActionButton fabCompose = (FloatingActionButton) view.findViewById(R.id.fabCompose);
+        fabCompose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserFragment.this.onClickCompose(view);
+            }
+        });
         return view;
+    }
+
+    public void onClickCompose(View view){
+        Intent intent = new Intent(view.getContext(), ComposeTweetActivity.class);
+        startActivityForResult(intent, Constants.COMPOSE_REQUEST_CODE);
     }
 
     @Override
