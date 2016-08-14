@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     tools:context="com.codepath.apps.twitter.activities.ProfileActivity">
 
@@ -17,10 +18,23 @@
         android:layout_below="@+id/profileAppBar"
         android:id="@+id/flProfileHeader" />
 
-    <FrameLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_below="@+id/flProfileHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyCustomTabLayout"
+        android:background="@color/white"
+        app:tabGravity="fill"
+        app:tabMode="fixed" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_below="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/flProfileHeader"
-        android:id="@+id/flUserTimeLine" />
+        android:background="@android:color/white">
+
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>

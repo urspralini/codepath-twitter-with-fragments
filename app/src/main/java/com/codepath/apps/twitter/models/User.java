@@ -7,8 +7,11 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by pbabu on 8/4/16.
@@ -33,6 +36,24 @@ public class User implements Parcelable {
         user.friendsCount = object.getInt("friends_count");
         user.tagLine = object.getString("description");
         return user;
+    }
+
+    public static ArrayList<User> fromJSON(JSONArray jsonArray) {
+        ArrayList<User> users = new ArrayList<>(jsonArray.length());
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject userJson = null;
+            try {
+                userJson = jsonArray.getJSONObject(i);
+                User user = User.fromJSON(userJson);
+                users.add(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
+
+        return users;
     }
 
     public String getName() {
