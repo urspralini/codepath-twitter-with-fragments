@@ -34,7 +34,7 @@ public class FollowUserAdapter extends RecyclerView.Adapter<FollowUserViewHolder
     @Override
     public FollowUserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        final View view = layoutInflater.inflate(R.layout.fragment_profile_header, parent, false);
+        final View view = layoutInflater.inflate(R.layout.friend_follower_item, parent, false);
         return new FollowUserViewHolder(view);
     }
 

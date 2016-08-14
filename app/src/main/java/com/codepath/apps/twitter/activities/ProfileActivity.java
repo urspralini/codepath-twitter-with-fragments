@@ -31,7 +31,7 @@ public class ProfileActivity extends BaseActivity implements ProfileHeaderFragme
         setupToolBar();
         mVPager = (ViewPager)findViewById(R.id.vPager);
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            private String tabTitles[] = new String[] {"TimeLine", "Followers", "Friends"};
+            private String tabTitles[] = new String[] {"Tweets", "Followers", "Friends"};
             @Override
             public Fragment getItem(int position) {
                 if(position == 0) {
