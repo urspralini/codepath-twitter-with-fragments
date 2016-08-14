@@ -89,6 +89,8 @@ public class TimelineActivity extends BaseActivity{
         super.onResume();
         if(!Helper.isNetworkAvailable(this) || !Helper.isOnline()){
             Helper.showSnackBar(mVPager, this);
+        }else {
+            getCurrentUser();
         }
     }
 

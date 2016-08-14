@@ -1,5 +1,6 @@
 package com.codepath.apps.twitter.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import com.codepath.apps.twitter.activities.ComposeTweetActivity;
 import com.codepath.apps.twitter.adapters.TweetsAdapter;
 import com.codepath.apps.twitter.clients.TwitterClient;
 import com.codepath.apps.twitter.models.Tweet;
-import com.codepath.apps.twitter.models.User;
 import com.codepath.apps.twitter.viewholders.TweetItemViewHolder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -43,7 +43,6 @@ public abstract class TweetListFragment extends Fragment implements TweetItemVie
     protected RecyclerView mRvTweets;
     protected Long mMaxId;
     private TweetItemViewHolder.onImageClickListener mListener;
-    protected User mCurrentUser;
     protected JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONArray jsonArray) {
@@ -75,6 +74,11 @@ public abstract class TweetListFragment extends Fragment implements TweetItemVie
         super.onCreate(savedInstanceState);
         mTweets = new ArrayList<>();
         mTweetsAdapter = new TweetsAdapter(getActivity(), mTweets, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         getTimeLineTweets();
     }
 
@@ -127,5 +131,18 @@ public abstract class TweetListFragment extends Fragment implements TweetItemVie
     private void getTimeLineTweets(){
         if(mTweetsAdapter.getItemCount() > 60) return;
         fetchTweets();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == Constants.COMPOSE_REQUEST_CODE) {
+                Tweet newTweet = data.getParcelableExtra(Constants.NEW_TWEET_KEY);
+                if(newTweet != null) {
+                    mTweetsAdapter.addToFirstPosition(newTweet);
+                    mRvTweets.scrollToPosition(0);
+                }
+            }
+        }
     }
 }

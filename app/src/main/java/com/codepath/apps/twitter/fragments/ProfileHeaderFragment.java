@@ -34,6 +34,8 @@ public class ProfileHeaderFragment extends Fragment {
     private TextView tvTagLine;
     private TextView tvFollowingCount;
     private TextView tvFriendsCount;
+    private TextView tvFollowing;
+    private TextView tvFriends;
 
     private JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
         @Override
@@ -46,6 +48,8 @@ public class ProfileHeaderFragment extends Fragment {
                         .into(ivProfileImage);
                 tvScreenName.setText(mUser.getScreenName());
                 tvTagLine.setText(mUser.getTagLine());
+                tvFollowing.setText(R.string.following);
+                tvFriends.setText(R.string.followers);
                 tvFriendsCount.setText(String.valueOf(mUser.getFriendsCount()));
                 tvFollowingCount.setText(String.valueOf(mUser.getFollowingCount()));
             } catch (JSONException e) {
@@ -96,7 +100,9 @@ public class ProfileHeaderFragment extends Fragment {
         ivProfileImage = (ImageView)view.findViewById(R.id.ivProfileImage);
         tvScreenName = (TextView)view.findViewById(R.id.tvScreenName);
         tvTagLine = (TextView)view.findViewById(R.id.tvTagLine);
+        tvFollowing = (TextView)view.findViewById(R.id.tvFollowing);
         tvFollowingCount = (TextView)view.findViewById(R.id.tvFollowingCount);
+        tvFriends = (TextView)view.findViewById(R.id.tvFriends);
         tvFriendsCount = (TextView)view.findViewById(R.id.tvFriendsCount);
         return view;
     }

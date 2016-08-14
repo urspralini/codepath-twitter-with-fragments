@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.codepath.apps.twitter.Constants;
 import com.codepath.apps.twitter.R;
 import com.codepath.apps.twitter.beans.NewTweet;
 import com.codepath.apps.twitter.databinding.ActivityComposeBinding;
 import com.codepath.apps.twitter.models.Tweet;
+import com.codepath.apps.twitter.utils.Helper;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
@@ -26,16 +28,27 @@ public class ComposeTweetActivity extends BaseActivity {
     private ActivityComposeBinding binding;
     private ImageView mIvComposeUserProfile;
     private NewTweet mNewTweet = new NewTweet();
+    private RelativeLayout rlCompose;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_compose);
         binding.setNewTweet(mNewTweet);
         mIvComposeUserProfile = binding.composeToolBar.ivComposeUserProfile;
+        rlCompose = binding.rlcompose;
         setSupportActionBar(binding.composeToolBar.composeToolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getCurrentUser();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!Helper.isNetworkAvailable(this) || !Helper.isOnline()){
+            Helper.showSnackBar(rlCompose, this);
+        }else {
+            getCurrentUser();
+        }
     }
 
     public void onClickTweet(View view){
