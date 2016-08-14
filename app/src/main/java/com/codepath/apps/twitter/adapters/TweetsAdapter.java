@@ -1,6 +1,7 @@
 package com.codepath.apps.twitter.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -8,14 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.codepath.apps.twitter.PatternEditableBuilder;
 import com.codepath.apps.twitter.R;
-import com.codepath.apps.twitter.viewholders.TweetItemViewHolder;
 import com.codepath.apps.twitter.models.Tweet;
+import com.codepath.apps.twitter.viewholders.TweetItemViewHolder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Created by pbabu on 8/4/16.
@@ -65,7 +68,17 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 .load(tweet.getUser().getProfileImageUrl())
                 .fitCenter()
                 .into(tweetItemViewHolder.ivUserProfileImage);
-
+        new PatternEditableBuilder()
+                .addPattern(Pattern.compile("\\@(\\w+)"),
+                        Color.BLUE,
+                        new PatternEditableBuilder.SpannableClickedListener() {
+                            @Override
+                            public void onSpanClicked(String text) {
+                                //exclude '@'
+                                mListener.showUserProfile(text.substring(1));
+                            }
+                        })
+                .into(tweetItemViewHolder.tvTweetText);
     }
 
     public void addAll(List<Tweet> tweets){
