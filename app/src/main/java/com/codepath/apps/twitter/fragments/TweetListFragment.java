@@ -20,6 +20,7 @@ import com.codepath.apps.twitter.RestApplication;
 import com.codepath.apps.twitter.activities.ComposeTweetActivity;
 import com.codepath.apps.twitter.adapters.TweetsAdapter;
 import com.codepath.apps.twitter.clients.TwitterClient;
+import com.codepath.apps.twitter.listeners.EndlessRecyclerViewScrollListener;
 import com.codepath.apps.twitter.models.Tweet;
 import com.codepath.apps.twitter.viewholders.TweetItemViewHolder;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -124,6 +125,12 @@ public abstract class TweetListFragment extends Fragment implements TweetItemVie
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRvTweets.setLayoutManager(layoutManager);
         mRvTweets.setAdapter(mTweetsAdapter);
+        mRvTweets.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                fetchTweets();
+            }
+        });
     }
 
     protected abstract void fetchTweets();

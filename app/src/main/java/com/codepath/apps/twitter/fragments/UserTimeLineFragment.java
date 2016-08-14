@@ -20,6 +20,6 @@ public class UserTimeLineFragment extends TweetListFragment{
     @Override
     protected void fetchTweets() {
         final String screenName = getArguments().getString(SCREEN_NAME_KEY);
-        mClient.getUserTimeline(screenName, handler);
+        mClient.getUserTimeline(mMaxId!= null? mMaxId-1:null,screenName, handler);
     }
 }
