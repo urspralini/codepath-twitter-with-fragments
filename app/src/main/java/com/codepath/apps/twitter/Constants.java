@@ -7,4 +7,5 @@ public class Constants {
     public static final int COMPOSE_REQUEST_CODE = 10001;
     public static final String CURRENT_USER_KEY = "currentUser";
     public static final String NEW_TWEET_KEY = "newTweet";
+    public static final String SCREEN_NAME_KEY = "screen_name";
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlTweetItem"
     android:layout_width="match_parent"
-    android:background="@drawable/tweet_item_shape"
+    android:background="@drawable/list_item_shape"
     android:layout_height="wrap_content">
 
 
