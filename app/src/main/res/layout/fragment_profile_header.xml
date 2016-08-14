@@ -43,16 +43,17 @@ android:layout_height="match_parent">
 </LinearLayout>
 
 <TextView
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="8dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/tvTagLine"
+    android:textColor="@color/black"
     tools:text="Tag Line"
     android:singleLine="true"
     android:ellipsize="end"
     android:layout_below="@+id/llnameInfo"
-    android:layout_alignLeft="@+id/ivProfileImage"
+    android:layout_alignLeft="@+id/llnameInfo"
     android:layout_marginTop="3dp" />
 
 <LinearLayout
@@ -60,7 +61,8 @@ android:layout_height="match_parent">
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/llFollowing"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_alignLeft="@+id/llnameInfo"
+    android:paddingTop="8dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:layout_below="@+id/tvTagLine">
     <TextView
@@ -68,6 +70,7 @@ android:layout_height="match_parent">
         android:layout_height="wrap_content"
         android:id="@+id/tvFollowingCount"
         android:textStyle="bold"
+        android:textColor="@color/black"
         tools:text="100"/>
 
     <TextView
@@ -84,6 +87,7 @@ android:layout_height="match_parent">
         android:layout_height="wrap_content"
         android:id="@+id/tvFriendsCount"
         android:textStyle="bold"
+        android:textColor="@color/black"
         tools:text="2000"/>
 
     <TextView
